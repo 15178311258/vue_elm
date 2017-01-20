@@ -1,0 +1,154 @@
+@charset "utf-8";
+body {
+    min-width: 300px;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "NOTOSANSCJK-LIGHT";
+    src: url(http://web.test.jatm.cn/shop/css/NOTOSANSCJK-REGULAR.OTF) format('truetype');
+}
+
+body {
+    background: #fff;
+    color: #343232;
+    font-size: 15px;
+    font-family: "NOTOSANSCJK-REGULAR", "Microsoft YaHei", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+img {
+    /*display: block;*/
+    /* width: 100%;*/
+    border: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+input,
+textarea,
+select,
+button {
+    font-size: 15px;
+    font-family: "NOTOSANSCJK-REGULAR", "Microsoft YaHei", Arial, Helvetica, sans-serif;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+}
+
+.clear-fix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.clear-left {
+    float: left;
+}
+
+.clear-right {
+    float: right;
+}
+
+i {
+    font-style: normal;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gray {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+}
+
+@media only screen and (min-width: 1200px) {
+    html {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 50px !important;
+    }
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+.clearfix::after {
+    display: block;
+    content: "";
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+}
