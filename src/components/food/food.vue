@@ -39,7 +39,7 @@
                         <ul v-show="food.ratings  && food.ratings.length">
                             <li class="rating-item" v-for="rating in food.ratings" v-show="needShow(rating.rateType,rating.text)">
                                 <div class="rating-info">
-                                    <div class="rating-time">{{rating.rateTime}}</div>
+                                    <div class="rating-time">{{rating.rateTime | formatDate}}</div>
                                     <p class="rating-content">
                                         <span :class="{'icon-thumb_down':rating.rateType===1,'icon-thumb_up':rating.rateType===0}"></span>
                                         <span class="rating-content-text">{{rating.text}}</span>
@@ -51,7 +51,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="rating-no" v-show="!food.ratings || !food.ratings.length "></div>
+                        <div class="rating-no" v-show="!food.ratings || !food.ratings.length ">暂无评价</div>
                     </div>
                 </div>
             </div>
@@ -62,6 +62,7 @@
 <script>
     import BScroll from 'better-scroll';
     import Vue from 'vue';
+    import {formatDate} from 'common/js/date.js';
     import cartcontrol from "components/cartcontrol/cartcontrol";
     import splitbar from "components/splitbar/splitbar";
     import ratingselect from "components/ratingselect/ratingselect";
@@ -85,6 +86,12 @@
                     negative: "吐槽"
                 }
 
+            }
+        },
+        filters:{
+            formatDate(time){
+                let date=new Date(time);
+                return formatDate(date, "yyyy-MM-dd hh:mm")
             }
         },
         methods: {
@@ -124,7 +131,7 @@
                 Vue.set(this.food, "count", 1)
             },
             needShow(type, text) { //选择评论内容
-                if (!this.onlyContent || !text) { //仅读有内容的或者头评论文本的
+                if (!this.onlyContent && !text) { //仅读有内容的或者头评论文本的
                     return false
                 }
                 if (this.selectType === ALL) { //是否全选
@@ -323,5 +330,11 @@
         height: 12px;
         border-radius: 50%;
         vertical-align: top;
+    }
+    
+    .rating-no {
+        padding: 16px 18px;
+        font-size: 12px;
+        color: rgb(147, 153, 159);
     }
 </style>
