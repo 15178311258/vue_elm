@@ -9,9 +9,7 @@
             <span class="icon-check_circle" :class="{'ratingselect-switch-on':onlyContent}"></span>
             <span class="ratingselect-switch-text">只看评论内容</span>
         </div>
-        
     </div>
-    
 </template>
 <script>
     const POSITIVE = 0;

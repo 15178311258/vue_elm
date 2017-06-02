@@ -230,6 +230,7 @@
         height: 12px;
         background: url(img/bulletin@2x.png) no-repeat;
         background-size: 100%;
+        vertical-align: initial;
     }
     
     .bullentin-text {
