@@ -1,3 +1,7 @@
+/**
+ * 格式化时间
+ * @example formatDate(4255214234545,"yyyy-MM-dd hh:mm")
+ */
 export function formatDate(date, fmt) {
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));

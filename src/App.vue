@@ -12,25 +12,34 @@
            <router-link to="/seller">商家</router-link>
         </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+        <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
     import header from "./components/header/header"
+    import {urlParse} from 'common/js/util.js'
     const ERR_OK = 0;
 
     export default {
         data() {
             return {
-                seller: {}
+                seller: {
+                    id:(() => {
+                        let queryParam=urlParse();//获取参数的方法
+                        return queryParam.id
+                    })()
+                }
             }
         },
         created() {
-            this.axios.get("/api/seller").then((response) => {
+            this.axios.get("/api/seller?id="+this.seller.id).then((response) => {
                 // response = JSON.parse(response)==response.json()
                 if (response.data.erron === ERR_OK) {
-                    this.seller = response.data.data
+                   // this.seller = response.data.data
+                    this.seller= Object.assign({},this.seller,response.data.data);//在seller原有属性的基础上增加对象属性
                 }
             }).then((error) => {
                 // console.log(error)

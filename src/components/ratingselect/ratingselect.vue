@@ -6,7 +6,7 @@
             <span class="ratingselect-block ratingselect-negative" :class="{'ratingselect-active':selectType===1}" @click="selectRatings(1,$event)">{{desc.negative}}<span class="ratingselect-count">{{negatives.length}}</span></span>
         </div>
         <div class="ratingselect-switch" @click="toggleContent($event)">
-            <span class="icon-check_circle" :class="{'ratingselect-switch-on':onlyContent}"></span>
+            <span class="icon-check_circle" :class="{'ratingselect-switch-on':!onlyContent}"></span>
             <span class="ratingselect-switch-text">只看评论内容</span>
         </div>
     </div>
@@ -29,7 +29,7 @@
             },
             onlyContent: {
                 type: Boolean,
-                default: false
+                default: true
             },
             desc: {
                 type: Object,

@@ -85,6 +85,7 @@
                             click: true
                         })
                     })
+                   
                 }
             }).then((error)=>{
                 // console.log(error)
@@ -135,7 +136,10 @@
     bottom: 0
     left: 0
     width: 100%
-    overflow: hidden
+    //overflow: hidden
+    @media only screen and (min-width: 1200px)
+        width: 50%
+        left: 25%
     .overview
         display: flex
         padding: 18px 12px
