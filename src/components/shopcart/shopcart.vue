@@ -2,25 +2,33 @@
     <div>
         <div class="shopcart">
             <div class="shopcart-content" @click="toggleList">
-            <div class="shopcart-content-left">
-                <div class="shopcart-logo-wrapper">
-                    <div class="shopcart-logo" :class="{'high-light':totalCount>0}">
-                        <i class="icon-shopping_cart" :class="{'high-light':totalCount>0}"></i>
-                    </div>
-                    <div class="shopcart-count" v-show="totalCount>0">
-                        {{totalCount}}
-                    </div>
+                <div class="shopcart-content-left">
+                    <div class="shopcart-logo-wrapper">
+                        <div class="shopcart-logo" :class="{'high-light':totalCount>0}">
+                            <i class="icon-shopping_cart" :class="{'high-light':totalCount>0}"></i>
+                        </div>
+                        <div class="shopcart-count" v-show="totalCount>0">
+                            {{totalCount}}
+                        </div>
                     </div>
                     <div class="shopcart-price" :class="{'high-light-price':totalPrice>0}">
                         &yen;{{totalPrice}}
                     </div>
                     <div class="shopcart-desc">另需要配送费&yen;<span>{{deliveryPrice}}</span>元
                     </div>
-                
+                </div>
+                <div class="shopcart-content-right" :class="payClass" @click.stop.prevent="pay">
+                    <div class="shopcart-minPrice">{{payDesc}}</div>
+                </div> 
             </div>
-            <div class="shopcart-content-right" :class="payClass" @click.stop.prevent="pay">
-                <div class="shopcart-minPrice">{{payDesc}}</div>
-            </div> 
+            <div class="ball-container">
+                <div class="ball" v-for="ball in balls" v-show="ball.show">
+                    <transition name="drop" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+                        <div v-show="ball.show" class="ball">
+                            <div class="inner inner-hook"></div>
+                        </div>
+                    </transition>
+                </div>
             </div>
             <transition name="fold">
                 <div class="shopcart-list" v-show="listShow">
@@ -71,7 +79,9 @@
         },
         data() {
             return {
-                fold: true //默认折叠
+                fold: true, //默认折叠
+                balls: [{show: false}, {show: false}, {show: false}, {show: false}, {show: false}],
+                dropBalls: []
             }
         },
         methods: {
@@ -94,6 +104,51 @@
                     return;
                 }
                 window.alert(`支付${this.totalPrice}元`)
+            },
+            drop(el) {
+                for (let i = 0; i < this.balls.length; i++) {
+                    let ball = this.balls[i];
+                    if (!ball.show) {
+                        ball.show = true;
+                        ball.el = el;
+                        this.dropBalls.push(ball);
+                        return;
+                    }
+                }
+            },
+            beforeEnter(el) {
+                let count = this.balls.length;
+                while (count--) {
+                    let ball = this.balls[count];
+                    if (ball.show) {
+                        let rect = ball.el.getBoundingClientRect();
+                        let x = rect.left - 32;
+                        let y = -(window.innerHeight - rect.top - 22);
+                        el.style.display = '';
+                        el.style.webkitTransform = `translate3d(0,${y}px,0)`;
+                        el.style.transform = `translate3d(0,${y}px,0)`;
+                        let inner = el.getElementsByClassName('inner-hook')[0];
+                        inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
+                        inner.style.transform = `translate3d(${x}px,0,0)`;
+                    }
+                }
+            },
+            enter(el) {
+    //          let rf = el.offestHeight;
+                this.$nextTick(() => {
+                    el.style.webkitTransform = 'translate3d(0,0,0)';
+                    el.style.transform = 'translate3d(0,0,0)';
+                    let inner = el.getElementsByClassName('inner-hook')[0];
+                    inner.style.webkitTransform = 'translate3d(0,0,0)';
+                    inner.style.transform = 'translate3d(0,0,0)';
+                });
+            },
+            afterEnter(el) {
+                let ball = this.dropBalls.shift();
+                if (ball) {
+                    ball.show = false;
+                    el.style.display = 'none';
+                }
             }
         },
         computed: {
@@ -155,6 +210,9 @@
         }
     };
 </script>
+<style lang="stylus" rel="stylesheet/stylus">
+    @import "ball.styl";
+</style>
 <style type="text/css">
     .shopcart {
         position: fixed;

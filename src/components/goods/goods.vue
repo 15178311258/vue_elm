@@ -30,7 +30,7 @@
                                     <s><span v-show="food.oldPrice" class="food-oldPrice">&yen;{{food.oldPrice}}</span></s> 
                                  </div>
                                  <div class="cart-wrapper">
-                                     <v-cartcontrol :food="food"></v-cartcontrol>
+                                     <v-cartcontrol :food="food" @increment="incrementTotal"></v-cartcontrol>
                                  </div>
                             </div>
                         </li>
@@ -38,7 +38,7 @@
                 </li>
             </ul>
         </div>
-        <v-shopcart  :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></v-shopcart>
+        <v-shopcart  :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" ref="shopcart"></v-shopcart>
         <v-food :food="selectedFood" ref="food"></v-food>
         </div>
 </template>
@@ -137,6 +137,9 @@
                 }
                 this.selectedFood = food;
                 this.$refs.food.show(); //父组件调用子组件方法：ref="food" ,this.$refs.food.show()直接调用
+            },
+            incrementTotal(target) {
+                this.$refs.shopcart.drop(target);
             }
         },
         components: {

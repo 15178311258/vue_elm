@@ -29,6 +29,7 @@
                 } else {
                     this.food.count++;
                 }
+                this.$emit('increment', event.target); // 子组件通过 $emit触发父组件的方法 increment 
             },
             decreaseCart(e) {
                 if (!e._constructed) { //浏览器事件时 e._constructed:false;自定义事件时 true
