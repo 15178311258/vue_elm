@@ -21,7 +21,7 @@
                     <div class="shopcart-minPrice">{{payDesc}}</div>
                 </div> 
             </div>
-            <div class="ball-container">
+            <!--<div class="ball-container">
                 <div class="ball" v-for="ball in balls" v-show="ball.show">
                     <transition name="drop" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
                         <div v-show="ball.show" class="ball">
@@ -29,7 +29,7 @@
                         </div>
                     </transition>
                 </div>
-            </div>
+            </div>-->
             <transition name="fold">
                 <div class="shopcart-list" v-show="listShow">
                     <div class="list-header clear-fix">

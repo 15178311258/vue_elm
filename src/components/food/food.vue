@@ -139,7 +139,6 @@
                 } else { //否则根据选择展示内容
                     return type === this.selectType;
                 }
-
             }
         },
         components: {
