@@ -10,12 +10,12 @@
                 <div class="score-wrapper">
                     <span class="text">服务态度</span>
                     <v-star :size="36" :score="seller.serviceScore"></v-star>
-                    <span class="service-score">{{seller.serviceScore}}<span>
+                    <span class="service-score">{{seller.serviceScore}}</span>
                 </div>
                  <div class="score-wrapper">
                     <span class="text">商品评分</span>
                     <v-star :size="36" :score="seller.foodScore"></v-star>
-                      <span class="service-score">{{seller.foodScore}}<span>
+                      <span class="service-score">{{seller.foodScore}}</span>
                 </div>
                  <div class="score-wrapper">
                     <span class="text">送达时间</span>

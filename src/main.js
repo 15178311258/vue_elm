@@ -46,4 +46,4 @@ new Vue({
     router
 });
 //默认显示商品页
-//router.push("/goods")
+router.push("/goods")
